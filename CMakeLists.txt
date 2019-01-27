@@ -38,9 +38,9 @@ set_target_properties(${PROJECT_NAME} PROPERTIES COMPILE_FLAGS "${FLAGS} -fdata-
 set_target_properties(${PROJECT_NAME} PROPERTIES PREFIX "")
 
 if(WIN32)
-	target_link_libraries(${PROJECT_NAME} ${PROJECT_NAME}_rust Ws2_32 gcc Userenv Mswsock user32 Psapi Ncrypt Crypt32 Secur32 pthread)
-	set_target_properties(${PROJECT_NAME} PROPERTIES LINK_FLAGS "${PORTABLE_LINK_FLAGS} -Wl,-L@CMakeFiles/../rust/i686-pc-windows-gnu/debug")
-	set_target_properties(${PROJECT_NAME} PROPERTIES SUFFIX "_amxx_i386.dll")
+	target_link_libraries(${PROJECT_NAME} ${PROJECT_NAME}_rust Ws2_32 iphlpapi gcc Userenv Mswsock user32 Psapi Ncrypt Crypt32 Secur32 pthread dbghelp)
+	set_target_properties(${PROJECT_NAME} PROPERTIES LINK_FLAGS "${PORTABLE_LINK_FLAGS} -D_WIN32 -Wl,--subsystem,windows -Wl,-L@CMakeFiles/../rust/i686-pc-windows-gnu/${CMAKE_BUILD_TYPE}")
+	set_target_properties(${PROJECT_NAME} PROPERTIES SUFFIX "_amxx.dll")
 else()
 	target_link_libraries(${PROJECT_NAME} ${PROJECT_NAME}-rust pthread) # TODO: Conditional dynamic linking of OpenSSL. (ssl crypto)
 	set_target_properties(${PROJECT_NAME} PROPERTIES LINK_FLAGS "${PORTABLE_LINK_FLAGS} -fuse-ld=lld")
