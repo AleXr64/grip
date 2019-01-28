@@ -38,8 +38,9 @@ set_target_properties(${PROJECT_NAME} PROPERTIES COMPILE_FLAGS "${FLAGS} -fdata-
 set_target_properties(${PROJECT_NAME} PROPERTIES PREFIX "")
 
 if(WIN32)
+	set(FLAGS "-m32 -O3 -mtune=generic -fvisibility=hidden -flto -fPIC -DHAVE_STDINT_H -D_WIN32")
 	target_link_libraries(${PROJECT_NAME} ${PROJECT_NAME}_rust Ws2_32 iphlpapi gcc userenv mswsock user32 psapi ncrypt crypt32 secur32 pthread dbghelp)
-	set_target_properties(${PROJECT_NAME} PROPERTIES LINK_FLAGS "${PORTABLE_LINK_FLAGS} -D_WIN32 -Wl,--subsystem,windows -Wl,-Lrust/i686-pc-windows-gnu/${CMAKE_BUILD_TYPE}")
+	set_target_properties(${PROJECT_NAME} PROPERTIES LINK_FLAGS "${PORTABLE_LINK_FLAGS} -Wl,--subsystem,windows -Wl,-Lrust/i686-pc-windows-gnu/${CMAKE_BUILD_TYPE}")
 	set_target_properties(${PROJECT_NAME} PROPERTIES SUFFIX "_amxx.dll")
 else()
 	target_link_libraries(${PROJECT_NAME} ${PROJECT_NAME}-rust pthread) # TODO: Conditional dynamic linking of OpenSSL. (ssl crypto)
