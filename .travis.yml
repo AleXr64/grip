@@ -59,7 +59,7 @@ script:
 - sh $TRAVIS_BUILD_DIR/scripts/check_static_linking.sh .
 
 - cd $TRAVIS_BUILD_DIR/build/win-release
-- cmake $TRAVIS_BUILD_DIR -DCMAKE_BUILD_TYPE=release -DCMAKE_TOOLCHAIN_FILE=$TRAVIS_BUILD_DIR/mingw-w64-x86_64.cmake
+- cmake $TRAVIS_BUILD_DIR -DCMAKE_BUILD_TYPE=release -DWIN32=true -DCMAKE_TOOLCHAIN_FILE=$TRAVIS_BUILD_DIR/mingw-w64-x86_64.cmake
 - make -j1
 - sh $TRAVIS_BUILD_DIR/scripts/check_static_linking.sh .
 before_deploy:
