@@ -7,7 +7,7 @@ rust:
 - beta
 - nightly
 env:
-- PKG_CONFIG_ALLOW_CROSS=1 TARGET=i686-unknown-linux-gnu CXX=/usr/bin/clang++-7 CC=/usr/bin/clang-7
+- PKG_CONFIG_ALLOW_CROSS=1 TARGET=i686-unknown-linux-gnu CXX=/usr/bin/clang++-7 CC=/usr/bin/clang-7 WIN_TARGET=i686-pc-windows-gnu
 os:
 - linux
 matrix:
@@ -39,12 +39,14 @@ before_script:
 - $CXX --version
 - mkdir -p $TRAVIS_BUILD_DIR/build/debug/rust/$TARGET/debug
 - mkdir -p $TRAVIS_BUILD_DIR/build/release/rust/$TARGET/release
+- mkdir -p $TRAVIS_BUILD_DIR/build/win-release/rust/$WIN_TARGET/release
 - cmake  --version
 # - find / -name "libssl.a" 2>/dev/null
 script:
 - cd $TRAVIS_BUILD_DIR/rust
 - CARGO_TARGET_DIR=$TRAVIS_BUILD_DIR/build/debug/rust/$TARGET cargo test --verbose --target $TARGET
 - CARGO_TARGET_DIR=$TRAVIS_BUILD_DIR/build/release/rust/$TARGET cargo test --verbose --release --target $TARGET
+- CARGO_TARGET_DIR=$TRAVIS_BUILD_DIR/build/win-release/rust/$WIN_TARGET cargo test --verbose --release --target $WIN_TARGET
 
 - cd $TRAVIS_BUILD_DIR/build/debug
 - cmake $TRAVIS_BUILD_DIR -DCMAKE_BUILD_TYPE=Debug
@@ -53,6 +55,11 @@ script:
 
 - cd $TRAVIS_BUILD_DIR/build/release
 - cmake $TRAVIS_BUILD_DIR -DCMAKE_BUILD_TYPE=Release
+- make -j1
+- sh $TRAVIS_BUILD_DIR/scripts/check_static_linking.sh .
+
+- cd $TRAVIS_BUILD_DIR/build/win-release
+- cmake $TRAVIS_BUILD_DIR -DCMAKE_BUILD_TYPE=release -DCMAKE_TOOLCHAIN_FILE=~/mingw-w64-x86_64.cmake
 - make -j1
 - sh $TRAVIS_BUILD_DIR/scripts/check_static_linking.sh .
 before_deploy:
