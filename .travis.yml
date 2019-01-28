@@ -28,6 +28,8 @@ addons:
     - ninja-build
     - clang-7
     - lld-7
+    - g++-mingw-w64-i686
+    - mingw-w64-i686-dev
     sources:
       - ubuntu-toolchain-r-test
       - llvm-toolchain-xenial-7
@@ -69,7 +71,7 @@ deploy:
   file: grip-${TRAVIS_TAG}-${TARGET}.tar.gz
   skip_cleanup: true
   on:
-    repo: In-line/grip
+    repo: AleXr64/grip
 # NOTE make sure you only release *once* per target
     condition: $TRAVIS_RUST_VERSION = stable
     tags: true
