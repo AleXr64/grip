@@ -15,9 +15,10 @@ set(CMAKE_Fortran_COMPILER ${TOOLCHAIN_PREFIX}-gfortran)
 set(CMAKE_RC_COMPILER ${TOOLCHAIN_PREFIX}-windres)
 
 # target environment on the build host system
-set(CMAKE_FIND_ROOT_PATH "C:/mingw-w64/i686-6.3.0-posix-dwarf-rt_v5-rev1/mingw32/bin/")
+set(CMAKE_FIND_ROOT_PATH "C:/mingw-w64/i686-6.3.0-posix-dwarf-rt_v5-rev1/mingw32/")
 
 # modify default behavior of FIND_XXX() commands
 set(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)
 set(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)
 set(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)
+set(CMAKE_SYSROOT "C:/mingw-w64/i686-6.3.0-posix-dwarf-rt_v5-rev1/mingw32/")
