@@ -34,9 +34,9 @@ addons:
       - ubuntu-toolchain-r-test
       - llvm-toolchain-xenial-7
 install:
-- cargo install cross
 - rustup target add $TARGET
 - rustup target add $WIN_TARGET
+- cargo install cross --force
 before_script:
 - $CXX --version
 - mkdir -p $TRAVIS_BUILD_DIR/build/debug/rust/$TARGET/debug
