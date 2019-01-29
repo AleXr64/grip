@@ -48,7 +48,7 @@ script:
 - cd $TRAVIS_BUILD_DIR/rust
 - CARGO_TARGET_DIR=$TRAVIS_BUILD_DIR/build/debug/rust/$TARGET cargo test --verbose --target $TARGET
 - CARGO_TARGET_DIR=$TRAVIS_BUILD_DIR/build/release/rust/$TARGET cargo test --verbose --release --target $TARGET
-- CARGO_TARGET_DIR=$TRAVIS_BUILD_DIR/build/win-release/rust/$WIN_TARGET cargo test --verbose --release --target $WIN_TARGET
+- CARGO_TARGET_DIR=$TRAVIS_BUILD_DIR/build/win-release/rust/$WIN_TARGET cross test --verbose --release --target $WIN_TARGET
 - ls $TRAVIS_BUILD_DIR/build/win-release/rust/$WIN_TARGET/release
 -
 - cd $TRAVIS_BUILD_DIR/build/debug
